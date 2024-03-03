@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/font-awesome.css" rel="stylesheet"> 
+    <script defer src="js/appointment.js"></script>
+</head>
+<style>
+    /* Adjustments for form and appointments */
+    .book-appointment {
+        width: 40%;
+        float: left;
+        margin-right: 20px;
+    }
+    .appointment {
+        width: 30%;
+        float: left;
+        margin-bottom: 20px;
+        font-size: 14px; /* Adjust font size */
+    }
+    .appointment p {
+        margin: 5px 0; /* Adjust spacing */
+    }
+    input[type="text"], input[type="email"], textarea, input[type="date"], input[type="number"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    button {
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+    <div class="main" id="home">
+		<div class="header-bottom">
+			<nav class="navbar navbar-default">
+				<div class="navbar-header">
+				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				  </button>
+					<div class="logo">
+						<h3> Group 8 <p>Hospital Management System</p></h3>
+					</div>
+				</div>
+				<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+					<nav class="menu menu--sebastian">
+						<ul id="m_nav_list" class="m_nav menu__list">
+							<li class="m_nav_item menu__item menu__item--current" id="moble_nav_item_4"> <a href="index.html" class="menu__link">Appointment  </a> </li>
+							<li class="m_nav_item menu__item" id="moble_nav_item_5"> <a href="hospital_records.html" class="menu__link">Records</a> </li>
+							<li class="m_nav_item menu__item" id="moble_nav_item_6"> <a href="contact.html" class="menu__link"> Contact </a> </li>
+						</ul>
+					</nav>
+				</div>
+			</nav>
+		</div>
+</div>
+<div class="banner1 jarallax">
+	<div class="container">
+	</div>
+</div>
+<div class="services-breadcrumb">
+	<div class="container">
+		<ul>
+			<li>Make Appointment<i>|</i></li>
+			<li>Display Appointments</li>
+		</ul>
+	</div>
+</div>
+<div class="banner-bottom" id="about">
+	<div class="container">
+		<div class="book-appointment">
+			<h4>Make an appointment</h4>
+<form id="patientForm">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br>
+    <label for="gender">Gender:</label><br>
+    <select id="gender" name="gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+    </select><br>
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" name="age" required><br>
+    <label for="phone">Phone Number:</label><br>
+    <input type="text" id="phone" name="phone" required><br>
+    <label for="date">Date:</label><br>
+    <input type="date" id="date" name="date" required><br>
+    <label for="department">Department:</label><br>
+    <input type="text" id="department" name="department" required><br>
+    <label for="time">Time:</label><br>
+    <input type="text" id="time" name="time" required><br>
+    <label for="symptoms">Symptoms:</label><br>
+    <textarea id="symptoms" name="symptoms" required></textarea><br>
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br>
+    <button type="submit">Submit</button>
+</form>
+        </div>
+    </div>
+</div>
+<h3>Patient Details</h3>
+<div id="patientDetails" ></div>
+
+<script>
+    // Function to fetch and display existing patient data upon page load
+    window.onload = function() {
+        fetch("/getPatients")
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(patient => {
+                displayPatientDetails(patient);
+            });
+        })
+        .catch(error => console.error("Error fetching patients:", error));
+    }
+    
+    document.getElementById("patientForm").addEventListener("submit", function(event) {
+        // Form submission logic here
+    });
+    
+    function displayPatientDetails(patient) {
+        // Displaying patient details logic here
+        // Include a delete button with each appointment
+        const patientDetailsDiv = document.getElementById("patientDetails");
+        const appointmentDiv = document.createElement("div");
+        appointmentDiv.classList.add("appointment");
+    
+        appointmentDiv.innerHTML = `
+            <p><strong>Name:</strong> ${patient.name}</p>
+            <p><strong>Gender:</strong> ${patient.gender}</p>
+            <p><strong>Age:</strong> ${patient.age}</p>
+            <p><strong>Phone Number:</strong> ${patient.phone}</p>
+            <p><strong>Date:</strong> ${patient.date}</p>
+            <p><strong>Department:</strong> ${patient.department}</p>
+            <p><strong>Time:</strong> ${patient.time}</p>
+            <p><strong>Symptoms:</strong> ${patient.symptoms}</p>
+            <p><strong>Email:</strong> ${patient.email}</p>
+            <button onclick="deletePatient('${patient.id}')">Delete</button>
+        `;
+    
+        patientDetailsDiv.appendChild(appointmentDiv);
+    }
+
+    // Function to delete a patient
+    function deletePatient(patientId) {
+        fetch(`/deletePatient/${patientId}`, {
+            method: "DELETE"
+        })
+        .then(response => {
+            if (response.ok) {
+                // Reload the page after deletion
+                location.reload();
+            } else {
+                console.error("Error deleting patient.");
+            }
+        })
+        .catch(error => console.error("Error deleting patient:", error));
+    }
+</script>
+</body>
+</html>

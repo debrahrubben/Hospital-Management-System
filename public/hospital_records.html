@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Records</title>
+<style>
+    input[type="text"], input[type="email"], textarea, input[type="date"], select {
+        width: 200px;
+        margin-bottom: 10px;
+    }
+    button {
+        margin-top: 10px;
+    }
+    .record {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+    .record p {
+        margin: 0;
+    }
+</style>
+</head>
+<body>
+<h2>Hospital Records</h2>
+<form id="hospitalRecordForm">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br>
+    <label for="hospitalId">Hospital ID:</label><br>
+    <input type="text" id="hospitalId" name="hospitalId" required><br>
+    <label for="residence">Residence:</label><br>
+    <input type="text" id="residence" name="residence" required><br>
+    <label for="gender">Gender:</label><br>
+    <select id="gender" name="gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+    </select><br>
+    <label for="dob">Date of Birth:</label><br>
+    <input type="date" id="dob" name="dob" required><br>
+    <label for="illness">Illness:</label><br>
+    <input type="text" id="illness" name="illness" required><br>
+    <label for="doctor">Attending Doctor:</label><br>
+    <input type="text" id="doctor" name="doctor" required><br>
+    <label for="lastVisited">Last Time Visited:</label><br>
+    <input type="date" id="lastVisited" name="lastVisited" required><br>
+    <label for="stage">Stage:</label><br>
+    <select id="stage" name="stage" required>
+        <option value="Child">Child</option>
+        <option value="Adult">Adult</option>
+        <option value="Dead">Dead</option>
+    </select><br>
+    <button type="submit">Submit</button>
+</form>
+<div id="hospitalRecordDetails"></div>
+
+<!-- Search form -->
+<form id="searchForm">
+    <label for="searchId">Search by Hospital ID:</label><br>
+    <input type="text" id="searchId" name="searchId" required><br>
+    <button type="button" onclick="searchPatient()">Search</button>
+</form>
+
+<script>
+   document.getElementById("hospitalRecordForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const name = document.getElementById("name").value;
+    const hospitalId = document.getElementById("hospitalId").value;
+    const residence = document.getElementById("residence").value;
+    const gender = document.getElementById("gender").value;
+    const dob = document.getElementById("dob").value;
+    const illness = document.getElementById("illness").value;
+    const doctor = document.getElementById("doctor").value;
+    const lastVisited = document.getElementById("lastVisited").value;
+    const stage = document.getElementById("stage").value;
+
+    fetch("/addHospitalRecord", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, hospitalId, residence, gender, dob, illness, doctor, lastVisited, stage })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        displayHospitalRecordDetails(data);
+    })
+    .catch(error => console.error("Error:", error));
+});
+
+function displayHospitalRecordDetails(record) {
+    const recordDetailsDiv = document.getElementById("hospitalRecordDetails");
+    const recordDiv = document.createElement("div");
+    recordDiv.classList.add("record");
+
+    recordDiv.innerHTML = `
+        <h3>Hospital Record Details</h3>
+        <p><strong>Name:</strong> ${record.name}</p>
+        <p><strong>Hospital ID:</strong> ${record.hospital_id}</p> <!-- Adjusted property name -->
+        <p><strong>Residence:</strong> ${record.residence}</p>
+        <p><strong>Gender:</strong> ${record.gender}</p>
+        <p><strong>Date of Birth:</strong> ${record.dob}</p>
+        <p><strong>Illness:</strong> ${record.illness}</p>
+        <p><strong>Attending Doctor:</strong> ${record.doctor}</p>
+        <p><strong>Last Time Visited:</strong> ${record.last_visited}</p> <!-- Adjusted property name -->
+        <p><strong>Stage:</strong> ${record.stage}</p>
+    `;
+
+    recordDetailsDiv.appendChild(recordDiv);
+}
+
+
+    function searchPatient() {
+    const searchId = document.getElementById("searchId").value;
+
+    fetch(`/searchHospitalRecord/${searchId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.length > 0) {
+                // Clear previous search results
+                const recordDetailsDiv = document.getElementById("hospitalRecordDetails");
+                recordDetailsDiv.innerHTML = '';
+
+                // Display the found patient
+                data.forEach(record => {
+                    displayHospitalRecordDetails(record);
+                });
+            } else {
+                alert("Patient not found.");
+            }
+        })
+        .catch(error => console.error("Error searching patient:", error));
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetchExistingHospitalRecords();
+});
+
+function fetchExistingHospitalRecords() {
+    fetch("/getHospitalRecords")
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(record => {
+                displayHospitalRecordDetails(record);
+            });
+        })
+        .catch(error => console.error("Error fetching existing hospital records:", error));
+}
+</script>
+</body>
+</html>
+
