@@ -3,12 +3,67 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/font-awesome.css" rel="stylesheet"> 
-    <script defer src="js/appointment.js"></script>
 </head>
 <style>
+ /* Navbar styles */
+ .navbar {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        border-radius: 0;
+    }
+    .logo h3 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .logo p {
+        margin: 0;
+        font-size: 14px;
+        font-weight: normal;
+    }
+    .menu {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+    .menu__list {
+        display: flex;
+    }
+    .menu__item {
+        margin-right: 20px;
+    }
+    .menu__link {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+    }
+    .menu__link:hover {
+        text-decoration: underline;
+    }
+
+    /* Breadcrumb styles */
+    .services-breadcrumb {
+        background-color: #f5f5f5;
+        padding: 15px 0;
+        text-align: center;
+    }
+    .services-breadcrumb ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+    .services-breadcrumb li {
+        display: inline;
+        margin-right: 10px;
+        font-size: 16px;
+    }
+    .services-breadcrumb li:last-child {
+        font-weight: bold;
+    }
+
+
+
     /* Adjustments for form and appointments */
     .book-appointment {
         width: 40%;
@@ -20,30 +75,44 @@
         float: left;
         margin-bottom: 20px;
         font-size: 14px; /* Adjust font size */
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     .appointment p {
-        margin: 5px 0; /* Adjust spacing */
+        margin: 10px 0; /* Adjust spacing */
     }
-    input[type="text"], input[type="email"], textarea, input[type="date"], input[type="number"] {
-        width: 100%;
-        margin-bottom: 10px;
+    input[type="text"], input[type="email"], textarea, input[type="date"], input[type="number"], select {
+        width: calc(100% - 22px); /* Adjust width */
+        margin-bottom: 10px; /* Adjust margin */
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 14px; /* Adjust font size */
     }
     button {
         margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px; /* Adjust font size */
+    }
+    button:hover {
+        background-color: #45a049;
     }
 </style>
+
 </head>
 <body>
     <div class="main" id="home">
 		<div class="header-bottom">
 			<nav class="navbar navbar-default">
 				<div class="navbar-header">
-				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				  </button>
 					<div class="logo">
 						<h3> Group 8 <p>Hospital Management System</p></h3>
 					</div>
@@ -53,8 +122,6 @@
 						<ul id="m_nav_list" class="m_nav menu__list">
 							<li class="m_nav_item menu__item menu__item--current" id="moble_nav_item_4"> <a href="index.html" class="menu__link">Appointment  </a> </li>
 							<li class="m_nav_item menu__item" id="moble_nav_item_5"> <a href="hospital_records.html" class="menu__link">Records</a> </li>
-							<li class="m_nav_item menu__item" id="moble_nav_item_6"> <a href="contact.html" class="menu__link"> Contact </a> </li>
-						</ul>
 					</nav>
 				</div>
 			</nav>
@@ -120,9 +187,39 @@
         .catch(error => console.error("Error fetching patients:", error));
     }
     
-    document.getElementById("patientForm").addEventListener("submit", function(event) {
-        // Form submission logic here
-    });
+   // Modify your form submission event listener to handle form submission
+document.getElementById("patientForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Gather form data
+    const formData = {
+        name: document.getElementById("name").value,
+        gender: document.getElementById("gender").value,
+        age: document.getElementById("age").value,
+        phone: document.getElementById("phone").value,
+        date: document.getElementById("date").value,
+        department: document.getElementById("department").value,
+        time: document.getElementById("time").value,
+        symptoms: document.getElementById("symptoms").value,
+        email: document.getElementById("email").value
+    };
+
+    // Send a POST request to the server
+    fetch("/addPatient", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Assuming successful insertion, display the new appointment
+        displayPatientDetails(data);
+    })
+    .catch(error => console.error("Error adding patient:", error));
+});
+
     
     function displayPatientDetails(patient) {
         // Displaying patient details logic here

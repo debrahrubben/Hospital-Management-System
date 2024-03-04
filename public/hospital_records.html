@@ -25,7 +25,26 @@
     }
 </style>
 </head>
-<body>
+<body><div class="main" id="home">
+    <div class="header-bottom">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <div class="logo">
+                    <h3> Group 8 <p>Hospital Management System</p></h3>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                <nav class="menu menu--sebastian">
+                    <ul id="m_nav_list" class="m_nav menu__list">
+                        <li class="m_nav_item menu__item" id="moble_nav_item_4"> <a href="index.html" class="menu__link">Appointment  </a> </li>
+                        <li class="m_nav_item menu__item menu__item--current" id="moble_nav_item_5"> <a href="hospital_records.html" class="menu__link">Records</a> </li>
+                    </ul>
+            </nav>
+
+            </div>
+        </nav>
+ </div>
+</div>
 <h2>Hospital Records</h2>
 <form id="hospitalRecordForm">
     <label for="name">Name:</label><br>
@@ -56,7 +75,6 @@
     </select><br>
     <button type="submit">Submit</button>
 </form>
-<div id="hospitalRecordDetails"></div>
 
 <!-- Search form -->
 <form id="searchForm">
@@ -64,6 +82,9 @@
     <input type="text" id="searchId" name="searchId" required><br>
     <button type="button" onclick="searchPatient()">Search</button>
 </form>
+
+<div id="hospitalRecordDetails"></div>
+
 
 <script>
    document.getElementById("hospitalRecordForm").addEventListener("submit", function(event) {
