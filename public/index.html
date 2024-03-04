@@ -1,132 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
-<style>
- /* Navbar styles */
- .navbar {
-        background-color: #333;
-        color: #fff;
-        padding: 10px 0;
-        border-radius: 0;
-    }
-    .logo h3 {
-        margin: 0;
-        font-size: 24px;
-        font-weight: bold;
-    }
-    .logo p {
-        margin: 0;
-        font-size: 14px;
-        font-weight: normal;
-    }
-    .menu {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-    }
-    .menu__list {
-        display: flex;
-    }
-    .menu__item {
-        margin-right: 20px;
-    }
-    .menu__link {
-        color: #fff;
-        text-decoration: none;
-        font-size: 16px;
-    }
-    .menu__link:hover {
-        text-decoration: underline;
-    }
-
-    /* Breadcrumb styles */
-    .services-breadcrumb {
-        background-color: #f5f5f5;
-        padding: 15px 0;
-        text-align: center;
-    }
-    .services-breadcrumb ul {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-    }
-    .services-breadcrumb li {
-        display: inline;
-        margin-right: 10px;
-        font-size: 16px;
-    }
-    .services-breadcrumb li:last-child {
-        font-weight: bold;
-    }
+<body bgcolor="#333" style="width:98vw;">
+    <div class="header-bottom" style="position: relative; background-image: url('');">
+            <div class="header-bottom">
+                <div class="main" id="home">
+                    <nav class="navbar navbar-default">
+                        <div class="navbar-header">
+                            <div class="logo">
+                                <h3> Group 8 </h3>
+                                <h3>Hospital Management System</h3>
+                            </div>
+                        </div>
+                        <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                        </div>
+                    </nav>
+                </div>
+            </div>
 
 
-
-    /* Adjustments for form and appointments */
-    .book-appointment {
-        width: 40%;
-        float: left;
-        margin-right: 20px;
-    }
-    .appointment {
-        width: 30%;
-        float: left;
-        margin-bottom: 20px;
-        font-size: 14px; /* Adjust font size */
-        background-color: #f9f9f9;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .appointment p {
-        margin: 10px 0; /* Adjust spacing */
-    }
-    input[type="text"], input[type="email"], textarea, input[type="date"], input[type="number"], select {
-        width: calc(100% - 22px); /* Adjust width */
-        margin-bottom: 10px; /* Adjust margin */
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        font-size: 14px; /* Adjust font size */
-    }
-    button {
-        margin-top: 10px;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 14px; /* Adjust font size */
-    }
-    button:hover {
-        background-color: #45a049;
-    }
-</style>
-
-</head>
-<body>
-    <div class="main" id="home">
-		<div class="header-bottom">
-			<nav class="navbar navbar-default">
-				<div class="navbar-header">
-					<div class="logo">
-						<h3> Group 8 <p>Hospital Management System</p></h3>
-					</div>
-				</div>
-				<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
-					<nav class="menu menu--sebastian">
-						<ul id="m_nav_list" class="m_nav menu__list">
-							<li class="m_nav_item menu__item menu__item--current" id="moble_nav_item_4"> <a href="index.html" class="menu__link">Appointment  </a> </li>
-							<li class="m_nav_item menu__item" id="moble_nav_item_5"> <a href="hospital_records.html" class="menu__link">Records</a> </li>
-					</nav>
-				</div>
-			</nav>
-		</div>
-</div>
 <div class="banner1 jarallax">
 	<div class="container">
 	</div>
@@ -134,44 +30,65 @@
 <div class="services-breadcrumb">
 	<div class="container">
 		<ul>
-			<li>Make Appointment<i>|</i></li>
-			<li>Display Appointments</li>
+			<li> <a style="text-decoration: none;color: #333;" href="index.html">Appointment  </a></li><i>|</i>
+			<li><a style="text-decoration: none; color: #333;" href="hospital_records.html" >Records</a></li>
 		</ul>
 	</div>
+</div>
 </div>
 <div class="banner-bottom" id="about">
 	<div class="container">
 		<div class="book-appointment">
 			<h4>Make an appointment</h4>
-<form id="patientForm">
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" required><br>
-    <label for="gender">Gender:</label><br>
-    <select id="gender" name="gender" required>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
-    </select><br>
-    <label for="age">Age:</label><br>
-    <input type="number" id="age" name="age" required><br>
-    <label for="phone">Phone Number:</label><br>
-    <input type="text" id="phone" name="phone" required><br>
-    <label for="date">Date:</label><br>
-    <input type="date" id="date" name="date" required><br>
-    <label for="department">Department:</label><br>
-    <input type="text" id="department" name="department" required><br>
-    <label for="time">Time:</label><br>
-    <input type="text" id="time" name="time" required><br>
-    <label for="symptoms">Symptoms:</label><br>
-    <textarea id="symptoms" name="symptoms" required></textarea><br>
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email" required><br>
-    <button type="submit">Submit</button>
+<form id="patientForm" style=" display: flex;justify-content: center;align-items: center;">
+    <div class="book-appointment">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+        </div>
+        <div class="form-group">
+            <label for="department">Department:</label>
+            <input type="text" id="department" name="department" required>
+        </div>
+        <div class="form-group">
+            <label for="time">Time:</label>
+            <input type="text" id="time" name="time" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="symptoms">Symptoms:</label>
+            <textarea id="symptoms" name="symptoms" required></textarea>
+        </div> <button style="margin-right: 100px; height: 50px; background-color:green;" type="submit">Submit</button>
+    </div>
+   
 </form>
         </div>
     </div>
 </div>
-<h3>Patient Details</h3>
+<h3 style="color: aliceblue;">Appointments</h3>
 <div id="patientDetails" ></div>
 
 <script>

@@ -1,0 +1,176 @@
+.navbar {
+    color: #fff;
+    padding: 10px 0;
+    border-radius: 0;
+}
+.logo h3 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+.logo p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+}
+.menu {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.menu__list {
+    display: flex;
+}
+.menu__item {
+    margin-right: 20px;
+}
+.menu__link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+.menu__link:hover {
+    text-decoration: underline;
+}
+
+/* Breadcrumb styles */
+.services-breadcrumb {
+    background-color: #9DB2BF;
+    padding: 15px 0;
+    text-align: center;
+}
+.services-breadcrumb ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.services-breadcrumb li {
+    display: inline;
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.services-breadcrumb li:last-child {
+    font-weight: bold;
+}
+
+/* Adjustments for form */
+.book-appointment {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #333;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    color: #fff;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group {
+    width: calc(30% - 10px); /* Adjust width */
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    
+    box-sizing: border-box;
+    font-size: 14px;
+  
+}
+
+
+.appointment {
+width: 100%;
+margin-bottom: 5px;
+font-size: 12px;
+background-color: #f9f9f9;
+padding: 2px;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+}
+
+.appointment p {
+
+display: inline-block; /* Display all details in a single line */
+
+}
+.appointment button {
+flex: 0 0 auto;
+}
+
+
+
+input[type="text"], input[type="email"], textarea, input[type="date"], input[type="number"], select {
+    width: calc(100% - 22px); /* Adjust width */
+    margin-bottom: 10px; /* Adjust margin */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px; /* Adjust font size */
+}
+button {
+    
+    padding: 10px 20px;
+    background-color: tomato;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px; /* Adjust font size */
+}
+button:hover {
+    background-color: red;
+}
+
+.header-bottom {
+    position: relative;
+    background-image: url('./hospital.webp');
+    background-size: cover; /* Ensure the background image covers the entire element */
+    background-position: center; /* Center the background image */
+}
+
+
+.logo {
+    margin-top: 50px; /* Adjust margin-top to position the logo */
+    text-align: center; /* Center-align the text */
+    color: #333; /* Set text color */
+}
+
+
+.record {
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 12px;
+    background-color: #f9f9f9;
+    padding: 2px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    }
+    
+    .record p {
+    
+    display: inline-block; /* Display all details in a single line */
+    
+    }

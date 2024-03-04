@@ -1,90 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hospital Records</title>
-<style>
-    input[type="text"], input[type="email"], textarea, input[type="date"], select {
-        width: 200px;
-        margin-bottom: 10px;
-    }
-    button {
-        margin-top: 10px;
-    }
-    .record {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin-bottom: 20px;
-    }
-    .record p {
-        margin: 0;
-    }
-</style>
+    <link rel="stylesheet" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Hospital Records</title>
 </head>
-<body><div class="main" id="home">
-    <div class="header-bottom">
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <div class="logo">
-                    <h3> Group 8 <p>Hospital Management System</p></h3>
+<body bgcolor="#333" style="width:98vw;">
+    <div class="header-bottom" style="position: relative; background-image: url('');">
+            <div class="header-bottom">
+                <div class="main" id="home">
+                    <nav class="navbar navbar-default">
+                        <div class="navbar-header">
+                            <div class="logo">
+                                <h3> Group 8 </h3>
+                                <h3>Hospital Management System</h3>
+                            </div>
+                        </div>
+                        <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+                        </div>
+                    </nav>
                 </div>
             </div>
-            <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
-                <nav class="menu menu--sebastian">
-                    <ul id="m_nav_list" class="m_nav menu__list">
-                        <li class="m_nav_item menu__item" id="moble_nav_item_4"> <a href="index.html" class="menu__link">Appointment  </a> </li>
-                        <li class="m_nav_item menu__item menu__item--current" id="moble_nav_item_5"> <a href="hospital_records.html" class="menu__link">Records</a> </li>
-                    </ul>
-            </nav>
 
-            </div>
-        </nav>
- </div>
+
+<div class="banner1 jarallax">
+	<div class="container">
+	</div>
 </div>
-<h2>Hospital Records</h2>
-<form id="hospitalRecordForm">
-    <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" required><br>
-    <label for="hospitalId">Hospital ID:</label><br>
-    <input type="text" id="hospitalId" name="hospitalId" required><br>
-    <label for="residence">Residence:</label><br>
+<div class="services-breadcrumb">
+	<div class="container">
+		<ul>
+			<li> <a style="text-decoration: none;color: #333;" href="index.html">Appointment  </a></li><i>|</i>
+			<li><a style="text-decoration: none; color: #333;" href="hospital_records.html" >Records</a></li>
+		</ul>
+	</div>
+</div>
+</div>
+<div class="banner-bottom" id="about">
+	<div class="container">
+		<div class="book-appointment">
+			<h4>Hospital Records</h4>
+<form id="hospitalRecordForm"" style=" display: flex;justify-content: center;align-items: center;">
+    <div class="book-appointment">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="hospitalId">Hospital ID:</label>
+            <input type="text" id="hospitalId" name="hospitalId" required>
+        </div>
+        <div class="form-group">
+            <label for="residence">Residence:</label>
     <input type="text" id="residence" name="residence" required><br>
-    <label for="gender">Gender:</label><br>
-    <select id="gender" name="gender" required>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
-    </select><br>
-    <label for="dob">Date of Birth:</label><br>
-    <input type="date" id="dob" name="dob" required><br>
-    <label for="illness">Illness:</label><br>
-    <input type="text" id="illness" name="illness" required><br>
-    <label for="doctor">Attending Doctor:</label><br>
-    <input type="text" id="doctor" name="doctor" required><br>
-    <label for="lastVisited">Last Time Visited:</label><br>
-    <input type="date" id="lastVisited" name="lastVisited" required><br>
-    <label for="stage">Stage:</label><br>
-    <select id="stage" name="stage" required>
-        <option value="Child">Child</option>
-        <option value="Adult">Adult</option>
-        <option value="Dead">Dead</option>
-    </select><br>
-    <button type="submit">Submit</button>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth:</label><br>
+            <input type="date" id="dob" name="dob" required><br>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="illness">Illness:</label>
+    <input type="text" id="illness" name="illness" required>
+        </div>
+        <div class="form-group">
+            <label for="doctor">Attending Doctor:</label>
+            <input type="text" id="doctor" name="doctor" required>
+        </div>
+        <div class="form-group">
+            <label for="lastVisited">Last Time Visited:</label>
+    <input type="date" id="lastVisited" name="lastVisited" required>
+        </div>
+        <div class="form-group">
+            <label for="stage">Stage:</label>
+            <select id="stage" name="stage" required>
+                <option value="Child">Child</option>
+                <option value="Adult">Adult</option>
+                <option value="Dead">Dead</option>
+            </select>
+        </div>
+        </div> <button style="margin-right: 100px; height: 50px; background-color:green;" type="submit">Submit</button>
 </form>
-
+        </div>
+    </div>
+</div>
 <!-- Search form -->
 <form id="searchForm">
     <label for="searchId">Search by Hospital ID:</label><br>
     <input type="text" id="searchId" name="searchId" required><br>
     <button type="button" onclick="searchPatient()">Search</button>
 </form>
-
-<div id="hospitalRecordDetails"></div>
-
+<h3 style="color: aliceblue;">Records</h3>
+<div id="hospitalRecordDetails" ></div>
 
 <script>
    document.getElementById("hospitalRecordForm").addEventListener("submit", function(event) {
@@ -120,7 +139,6 @@ function displayHospitalRecordDetails(record) {
     recordDiv.classList.add("record");
 
     recordDiv.innerHTML = `
-        <h3>Hospital Record Details</h3>
         <p><strong>Name:</strong> ${record.name}</p>
         <p><strong>Hospital ID:</strong> ${record.hospital_id}</p> <!-- Adjusted property name -->
         <p><strong>Residence:</strong> ${record.residence}</p>
@@ -175,4 +193,3 @@ function fetchExistingHospitalRecords() {
 </script>
 </body>
 </html>
-
