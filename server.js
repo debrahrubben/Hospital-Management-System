@@ -58,23 +58,6 @@ app.delete('/deletePatient/:id', (req, res) => {
     });
 });
 
-
-
-app.post('/addHospitalRecord', (req, res) => {
-    const { name, hospitalId, residence, gender, dob, illness, doctor, lastVisited, stage } = req.body;
-    pool.query('INSERT INTO hospital_records (name, hospital_id, residence, gender, dob, illness, doctor, last_visited, stage) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
-        [name, hospitalId, residence, gender, dob, illness, doctor, lastVisited, stage],
-        (error, result) => {
-            if (error) {
-                console.error('Error executing query:', error);
-                res.status(500).json({ error: 'Error adding hospital record' });
-            } else {
-                res.status(200).json(result.rows[0]);
-            }
-        }
-    );
-});
-
 app.get('/searchHospitalRecord/:id', (req, res) => {
     const hospitalId = req.params.id;
     pool.query('SELECT * FROM hospital_records WHERE hospital_id = $1', [hospitalId], (error, result) => {
@@ -87,8 +70,23 @@ app.get('/searchHospitalRecord/:id', (req, res) => {
     });
 });
 
+app.post('/addHospitalRecord', (req, res) => {
+    const { name, hospitalId, residence, gender, dob, illness, doctor, lastVisited, stage } = req.body;
+    pool.query('INSERT INTO hospital_records (name, hospital_id, residence, gender, dob, illness, doctor, last_visited, stage) VALUES ($1, $2, $3, $4, CAST($5 AS DATE), $6, $7, CAST($8 AS DATE), $9) RETURNING *',
+        [name, hospitalId, residence, gender, dob, illness, doctor, lastVisited, stage],
+        (error, result) => {
+            if (error) {
+                console.error('Error executing query:', error);
+                res.status(500).json({ error: 'Error adding hospital record' });
+            } else {
+                res.status(200).json(result.rows[0]);
+            }
+        }
+    );
+});
+
 app.get('/getHospitalRecords', (req, res) => {
-    pool.query('SELECT * FROM hospital_records', (error, result) => {
+    pool.query('SELECT name, hospital_id, residence, gender, CAST(dob AS DATE) AS dob, illness, doctor, CAST(last_visited AS DATE) AS last_visited, stage FROM hospital_records', (error, result) => {
         if (error) {
             console.error('Error executing query:', error);
             res.status(500).json({ error: 'Error fetching hospital records' });
@@ -97,6 +95,7 @@ app.get('/getHospitalRecords', (req, res) => {
         }
     });
 });
+
 
 
 app.listen(port, () => {

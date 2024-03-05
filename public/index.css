@@ -36,7 +36,7 @@
 /* Breadcrumb styles */
 .services-breadcrumb {
     background-color: #9DB2BF;
-    padding: 15px 0;
+    padding: 7px 0;
     text-align: center;
 }
 .services-breadcrumb ul {
@@ -48,9 +48,6 @@
     display: inline;
     margin-right: 10px;
     font-size: 16px;
-    font-weight: bold;
-}
-.services-breadcrumb li:last-child {
     font-weight: bold;
 }
 
@@ -126,6 +123,7 @@ input[type="text"], input[type="email"], textarea, input[type="date"], input[typ
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 14px; /* Adjust font size */
+    background-color: aliceblue;
 }
 button {
     

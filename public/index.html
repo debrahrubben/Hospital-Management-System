@@ -44,7 +44,7 @@
     <div class="book-appointment">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required >
         </div>
         <div class="form-group">
             <label for="gender">Gender:</label>
@@ -138,28 +138,32 @@ document.getElementById("patientForm").addEventListener("submit", function(event
 });
 
     
-    function displayPatientDetails(patient) {
-        // Displaying patient details logic here
-        // Include a delete button with each appointment
-        const patientDetailsDiv = document.getElementById("patientDetails");
-        const appointmentDiv = document.createElement("div");
-        appointmentDiv.classList.add("appointment");
-    
-        appointmentDiv.innerHTML = `
-            <p><strong>Name:</strong> ${patient.name}</p>
-            <p><strong>Gender:</strong> ${patient.gender}</p>
-            <p><strong>Age:</strong> ${patient.age}</p>
-            <p><strong>Phone Number:</strong> ${patient.phone}</p>
-            <p><strong>Date:</strong> ${patient.date}</p>
-            <p><strong>Department:</strong> ${patient.department}</p>
-            <p><strong>Time:</strong> ${patient.time}</p>
-            <p><strong>Symptoms:</strong> ${patient.symptoms}</p>
-            <p><strong>Email:</strong> ${patient.email}</p>
-            <button onclick="deletePatient('${patient.id}')">Delete</button>
-        `;
-    
-        patientDetailsDiv.appendChild(appointmentDiv);
-    }
+function displayPatientDetails(patient) {
+    // Displaying patient details logic here
+    // Include a delete button with each appointment
+    const patientDetailsDiv = document.getElementById("patientDetails");
+    const appointmentDiv = document.createElement("div");
+    appointmentDiv.classList.add("appointment");
+
+    // Extracting only the date portion from the date field
+    const dateOnly = patient.date.split('T')[0];
+
+    appointmentDiv.innerHTML = `
+        <p><strong>Name:</strong> ${patient.name}</p>
+        <p><strong>Gender:</strong> ${patient.gender}</p>
+        <p><strong>Age:</strong> ${patient.age}</p>
+        <p><strong>Phone Number:</strong> ${patient.phone}</p>
+        <p><strong>Date:</strong> ${dateOnly}</p> <!-- Adjusted property to display only the date -->
+        <p><strong>Department:</strong> ${patient.department}</p>
+        <p><strong>Time:</strong> ${patient.time}</p>
+        <p><strong>Symptoms:</strong> ${patient.symptoms}</p>
+        <p><strong>Email:</strong> ${patient.email}</p>
+        <button onclick="deletePatient('${patient.id}')">Remove</button>
+    `;
+
+    patientDetailsDiv.appendChild(appointmentDiv);
+}
+
 
     // Function to delete a patient
     function deletePatient(patientId) {

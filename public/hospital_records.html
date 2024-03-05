@@ -97,10 +97,11 @@
     </div>
 </div>
 <!-- Search form -->
+<hr>
 <form id="searchForm">
-    <label for="searchId">Search by Hospital ID:</label><br>
-    <input type="text" id="searchId" name="searchId" required><br>
-    <button type="button" onclick="searchPatient()">Search</button>
+    <label for="searchId" style="color: aliceblue;">Search by Hospital ID:</label>
+    <input type="text" id="searchId" name="searchId" required style="width: min-content;">
+    <button type="button" style="background-color:#9DB2BF;" onclick="searchPatient()">Search</button>
 </form>
 <h3 style="color: aliceblue;">Records</h3>
 <div id="hospitalRecordDetails" ></div>
@@ -112,7 +113,8 @@
     const hospitalId = document.getElementById("hospitalId").value;
     const residence = document.getElementById("residence").value;
     const gender = document.getElementById("gender").value;
-    const dob = document.getElementById("dob").value;
+    const dobValue = document.getElementById("dob").value;
+    const dobDateOnly = dobValue.split(' ')[0]; // Extract date only
     const illness = document.getElementById("illness").value;
     const doctor = document.getElementById("doctor").value;
     const lastVisited = document.getElementById("lastVisited").value;
@@ -123,7 +125,7 @@
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ name, hospitalId, residence, gender, dob, illness, doctor, lastVisited, stage })
+        body: JSON.stringify({ name, hospitalId, residence, gender, dob: dobDateOnly, illness, doctor, lastVisited, stage })
     })
     .then(response => response.json())
     .then(data => {
@@ -131,6 +133,7 @@
         displayHospitalRecordDetails(data);
     })
     .catch(error => console.error("Error:", error));
+    this.reset();
 });
 
 function displayHospitalRecordDetails(record) {
@@ -138,15 +141,19 @@ function displayHospitalRecordDetails(record) {
     const recordDiv = document.createElement("div");
     recordDiv.classList.add("record");
 
+    // Extracting only the date portion from the dob and last_visited fields
+    const dobDate = record.dob.split('T')[0];
+    const lastVisitedDate = record.last_visited.split('T')[0];
+
     recordDiv.innerHTML = `
         <p><strong>Name:</strong> ${record.name}</p>
         <p><strong>Hospital ID:</strong> ${record.hospital_id}</p> <!-- Adjusted property name -->
         <p><strong>Residence:</strong> ${record.residence}</p>
         <p><strong>Gender:</strong> ${record.gender}</p>
-        <p><strong>Date of Birth:</strong> ${record.dob}</p>
+        <p><strong>Date of Birth:</strong> ${dobDate}</p>
         <p><strong>Illness:</strong> ${record.illness}</p>
         <p><strong>Attending Doctor:</strong> ${record.doctor}</p>
-        <p><strong>Last Time Visited:</strong> ${record.last_visited}</p> <!-- Adjusted property name -->
+        <p><strong>Last Time Visited:</strong> ${lastVisitedDate}</p> <!-- Adjusted property name -->
         <p><strong>Stage:</strong> ${record.stage}</p>
     `;
 
